@@ -1,0 +1,24 @@
+<%# if Current.user %>
+<!--  <li class="nav-item dropdown">-->
+<!--    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<%#= Current.user.first_name %> <%#= Current.user.last_name %>
+<!--    </a>-->
+<!--    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">-->
+<!--      <li><%#= link_to "Admin", root_path, class:"dropdown-item" if Current.user %></li>-->
+<!--      <li><%#= link_to "New Category", root_path, class:"dropdown-item" if Current.user %></li>-->
+<!--      <li><%#= link_to "New Post", root_path, class:"dropdown-item" %></li>-->
+<!--      <li><%#= link_to "New Project", root_path, class:"dropdown-item" if Current.user %></li>-->
+<!--      <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--      <li><%#= link_to "Edit Account", profile_settings_path, class:"dropdown-item" %></li>-->
+<!--      <li><hr class="dropdown-divider"></li>-->
+<!--      <li><%#= button_to "Sign out", logout_path, method: :delete, class:"dropdown-item" %></li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<%# else %>
+<!--  <li class="nav-item">-->
+<%#= link_to "Sign Up", sign_up_path, class:"nav-link" %>
+<!--  </li>-->
+<!--  <li class="nav-item">-->
+<%#= link_to "Login", sign_in_path, class:'nav-link'%>
+<!--  </li>-->
+<%# end %>

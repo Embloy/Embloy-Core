@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render partial: "layouts/header" %>
+  <%= javascript_include_tag 'rails-ujs' %>
+</head>
+<body>
+<%= render partial: "layouts/flash" %>
+<%= render 'layouts/navbar' %>
+<% unless Current.user.nil? %>
+  <% if !params[:latitude] && !params[:longitude] %>
+    <script>
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(updatePosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        let watchId;
+
+        if (navigator.geolocation) {
+            watchId = navigator.geolocation.watchPosition(updatePosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+
+        function updatePosition(position) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('PATCH', '/user/update_location');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.setRequestHeader('X-CSRF-Token', Rails.csrfToken());
+            xhr.send(JSON.stringify({latitude: position.coords.latitude, longitude: position.coords.longitude}));
+        }
+
+        function showError(error) {
+            // window.location = "/user/update_location?location_denied=true";
+        }
+
+        // Stop watching for position updates when the page unloads
+        window.addEventListener('unload', function () {
+            navigator.geolocation.clearWatch(watchId);
+        });
+    </script>
+  <% end %>
+<% end %>
+<%= yield %>
+<%= render partial: "layouts/footer" %>
+</body>
+</html>

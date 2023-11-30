@@ -1,0 +1,22 @@
+<%= stylesheet_link_tag "style" %>
+<% unless false %>
+
+
+  <div style="padding: 10px; border: 1px solid lightgray; background-color: #333333">
+    <p>
+      <strong>Applicant:</strong>
+      <%= application.user_id %>
+    </p>
+
+    <p>
+      <strong>Application:</strong>
+      <%= application.application_text %>
+      <%= application.application_documents %>
+    </p>
+
+    <p>
+      <strong>Response:</strong>
+      <%= application.response.nil? ? "No response yet ..." : application.response %>
+    </p>
+  </div>
+<% end %>

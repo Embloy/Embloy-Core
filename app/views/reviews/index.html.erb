@@ -1,0 +1,21 @@
+<%= stylesheet_link_tag "style" %>
+<h1>Your reviews</h1>
+
+<ul>
+  <% if @reviews.nil? || @reviews.empty?
+  %>
+    No reviews for user #<%= @user.id %> yet ...
+  <% else
+
+       @reviews.each do |review| %>
+      <li>
+        <b><%= review[:rating] %></b>
+        <b><%= review[:created_at] %></b>
+        <b><%= review[:created_by] %></b>
+        <b><%= review[:message] %></b>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h2><%= link_to "go back", _back_url %></h2>

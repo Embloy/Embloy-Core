@@ -1,0 +1,45 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+    <a href="<%= root_path %>" class="logo d-flex align-items-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <!-- <img src="assets/img/logo.png" alt=""> -->
+      <h1>Embloy</h1>
+    </a>
+
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About", "https://about.embloy.com" %></li>
+        <li><%= link_to "Your Feed", jobs_path %></li>
+        <li class="dropdown"><a href="#"><span>Jobs</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <ul>
+            <li><%= link_to "Create new Job", new_job_path %></li>
+            <li><%= link_to "Search for Jobs", jobs_find_path %></li>
+            <li><%= link_to "View on Map", jobs_map_path %></li>
+            <li><%= link_to "Your Jobs", own_jobs_path %></li>
+            <li><%= link_to "Your Applications", own_applications_path %></li>
+          </ul>
+        </li>
+        <li><%= link_to "API", api_path %></li>
+
+        <li>
+          <%= render 'layouts/notifications' %>
+        </li>
+
+        <% if Current.user %>
+          <li><%= link_to "My Profile", profile_index_path, class: 'get-a-quote' %></li>
+        <% else %>
+          <%= link_to "Login", sign_in_path, class: 'get-a-quote' %>
+        <% end %>
+
+      </ul>
+    </nav><!-- .navbar -->
+
+  </div>
+</header><!-- End Header -->
+<!-- End Header -->
+

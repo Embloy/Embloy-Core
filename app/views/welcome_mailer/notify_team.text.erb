@@ -1,0 +1,12 @@
+Hi <%= params[:user].first_name %>,
+
+<%= params[:user].first_name %> has successfully signed up to the prototype!
+Email: <%= @user.email %>.
+Name: <%= @user.full_name %>.
+
+Click on the link below to activate the account.
+<%= activate_account_url(token: @token) %>
+
+Best,
+
+The Embloy Team

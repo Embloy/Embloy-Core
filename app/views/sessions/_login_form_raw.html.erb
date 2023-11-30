@@ -1,0 +1,40 @@
+<%= form_with url: sign_in_path do |f| %>
+  <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+    <form>
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <%= f.email_field :email, type: "email", class: "form-control form-control-lg", id: 'validationServer08', placeholder: "Email", required: true %>
+        <label class="form-label" for="form1Example13">Email address</label>
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <%= f.password_field :password, type: "password", class: "form-control form-control-lg", id: 'inputPassword', placeholder: "*************", required: true, minlength: 8, maxlength: 72 %>
+        <label class="form-label" for="form1Example23">Password</label>
+      </div>
+
+      <div class="d-flex justify-content-around align-items-center mb-4">
+        <!-- Checkbox -->
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked/>
+          <label class="form-check-label" for="form1Example3"> Remember me </label>
+        </div>
+        <%= link_to 'Forgot your password?', "#{help_path}", class: 'nav-link px-2' %>
+      </div>
+
+      <%= f.submit 'Log in', class: 'btn btn-dark btn-lg btn-block', style: 'get-a-quote' %>
+
+      <div class="divider align-items-center my-4">
+        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+      </div>
+
+    </form>
+    <%= button_to 'Continue with Google', 'https://embloy.onrender.com/auth/google_oauth2', method: :post, class: 'btn btn-dark btn-lg btn-block', style: 'background-color: #393D47' %>
+    <br>
+    <%= button_to 'Continue with GitHub', 'https://embloy.onrender.com/auth/github', method: :post, class: 'btn btn-dark btn-lg btn-block', style: 'background-color: #393D47' %>
+  </div>
+  <p class="text-center text-muted mt-5 mb-0">Don't have an account yet?
+    <u>    <%= link_to "Create new account", sign_up_path, class: "fw-bold text-body" %></u>
+  </p>
+
+<% end %>

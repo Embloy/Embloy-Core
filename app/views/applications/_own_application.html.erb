@@ -1,0 +1,36 @@
+<% if application.status == '-1' %>
+  <div class="col mb-5 primary bg-danger" style="padding: 5px; border: 10px solid white">
+<% elsif application.status == '1' %>
+  <div class="col mb-5 primary bg-success" style="padding: 5px; border: 10px solid white">
+<% else %>
+  <div class="col mb-5 primary bg-light" style="padding: 5px; border: 10px solid white">
+<% end %>
+
+<div class="card h-100">
+  <!-- Job image-->
+  <!--    <img class="card-img-top" src="app/views/jobs/joblogo.png"/>-->
+  <!-- Job details-->
+  <div class="card-body p-4">
+    <div class="text-center ">
+      <!-- Title-->
+      <h5 class="fw-bolder"><%= application.job.title %></h5>
+      <!-- Salary-->
+      <!-- Description-->
+      <p class="card-text"><%= application.application_text %></p>
+      <p class="card-text">
+        <b><i>  <%= application.response.nil? ? "No response yet ..." : application.response %></i></b></p>
+      <div class="d-flex justify-content-between align-items-center">
+        <!-- Start slot-->
+        <small class="text-muted"><%= application.created_at %></small>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+    <div class="text-center">
+      <a href="<%= job_path(application.job_id) %>" class="readmore stretched-link">
+        <span>view job</span>
+        <i class="bi bi-arrow-right"></i></a>
+    </div>
+  </div>
+</div>
+</div>

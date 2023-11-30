@@ -1,0 +1,221 @@
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center" style="background-image: url('assets/img/page-header.jpg');">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>Embloy</h2>
+            <p><b>We broker casual jobs creating a fun way for people to make money spontaneously.</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <div class="container">
+        <ol>
+          <li><a href="<%= root_path %>">Home</a></li>
+          <li>About</li>
+        </ol>
+      </div>
+    </nav>
+  </div><!-- End Breadcrumbs -->
+
+
+  <!-- ======= About Us Section ======= -->
+  <!--  <section id="about" class="about">-->
+  <div class="container" data-aos="fade-up">
+    <div class="section-header">
+      <span>About</span>
+      <h2>About</h2>
+      <div class="card-columns">
+        <img src="https://www.gchhotelgroup.com/gch-hotel-group/destinations/muenchen/image-thumb__4597__facebook-share/shutterstock_786988819.jpeg" class="card-img-top" alt="...">
+
+        <div class="card bg-secondary text-white p-3">
+          <blockquote class="blockquote mb-0 card-body">
+            <p> The best application to quickly find a fitting job for you or spontaneously provide work-opportunities
+              to
+              others</p><br>
+            <footer class="blockquote-footer text-white">
+              <small class="text-muted-white">
+                Winston Smith <cite title="Source Title">Die Gruppe</cite>
+              </small>
+            </footer>
+          </blockquote>
+        </div>
+        <div class="card text-center">
+          <div class="card-body">
+            <h5><%= link_to "Privacy Policy", privacy_policy_path, class: 'card-title' %></h5>
+            <p class="card-text">We need your data, please</p>
+            <p class="card-text"><small class="text-muted">
+              Last updated 2 days ago</small></p>
+          </div>
+        </div>
+
+        <div class="card">
+          <a href="https://github.com/embloy">
+            <img src="https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png" class="card-img-top" alt="...">
+          </a>
+          <div class="card-body">
+            <!--      <p class="card-text">Feel free to contribute to the project or report issues <</a></p>-->
+            <%= "Feel free to " %>
+            <%= link_to "contribute", "https://github.com/embloy", class: 'card-text' %>
+            <%= " or " %>
+            <%= link_to "report issues", "https://github.com/embloy/embloy-backend/issues/new", class: 'card-text' %>
+
+          </div>
+        </div>
+
+        <div class="card text-left">
+          <div class="card-body">
+            <h5 class="card-title">Current issues</h5>
+            <p class="card-text">
+            <ul>
+              <li>
+                Clean up front end UI
+              </li>
+              <li>
+                Fix notification message and url
+              </li>
+              <li>
+                Complete API documentation
+              </li>
+              <li>
+                Add Terms of Service
+              </li>
+              <li>
+                Create basic project documentation
+              </li>
+            </ul>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <a href="https://www.postgresql.org/">
+            <img src="https://3.bp.blogspot.com/-_7UTBqs5MOE/Vou4ySy0jHI/AAAAAAAACho/uEYmYl2mB0k/s1600/postgresql-logo.png" class="card-img-top" alt="...">
+          </a></div>
+        <div class="card">
+          <a href="https://rubyonrails.org/">
+            <img src="https://deslivres.fr/wp-content/uploads/2019/07/Ruby-on-rails.jpg" class="card-img-top" alt="...">
+          </a></div>
+
+        <!--          <div class="card p-3 text-right">-->
+        <!--            <blockquote class="blockquote mb-0">-->
+        <!--              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
+        <!--              <footer class="blockquote-footer">-->
+        <!--                <small class="text-muted">-->
+        <!--                  Someone famous in <cite title="Source Title">Source Title</cite>-->
+        <!--                </small>-->
+        <!--              </footer>-->
+        <!--            </blockquote>-->
+        <!--          </div>-->
+        <div class="card bg-primary text-white">
+          <div class="card-body">
+            <h5 class="card-title">Contributors</h5>
+            <p class="card-text">Jan Hummel, Carlo Bortolan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--  </section> End About Us Section -->
+
+  <!-- ======= Stats Counter Section ======= -->
+  <section id="stats-counter" class="stats-counter pt-0">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-3 col-6">
+          <div class="stats-item text-center w-100 h-100">
+            <span data-purecounter-start="0" data-purecounter-end=<%= User.count %> data-purecounter-duration="1" class="purecounter"></span>
+            <p>Clients</p>
+          </div>
+        </div><!-- End Stats Item -->
+
+        <div class="col-lg-3 col-6">
+          <div class="stats-item text-center w-100 h-100">
+            <span data-purecounter-start="0" data-purecounter-end=<%= Job.count %> data-purecounter-duration="1" class="purecounter"></span>
+            <p>Jobs</p>
+          </div>
+        </div><!-- End Stats Item -->
+
+        <div class="col-lg-3 col-6">
+          <div class="stats-item text-center w-100 h-100">
+            <span data-purecounter-start="0" data-purecounter-end=<%= Application.count %> data-purecounter-duration="1" class="purecounter"></span>
+            <p>Applications</p>
+          </div>
+        </div><!-- End Stats Item -->
+
+        <div class="col-lg-3 col-6">
+          <div class="stats-item text-center w-100 h-100">
+            <span data-purecounter-start="0" data-purecounter-end=<%= CompanyUser.count %> data-purecounter-duration="1" class="purecounter"></span>
+            <p>Companies</p>
+          </div>
+        </div><!-- End Stats Item -->
+
+      </div>
+
+    </div>
+  </section><!-- End Stats Counter Section -->
+
+
+  <!-- ======= Our Team Section ======= -->
+  <section id="team" class="team pt-0">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <span>Our Team</span>
+        <h2>Our Team</h2>
+
+      </div>
+
+      <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="member">
+            <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+            <div class="member-content">
+              <h4>Jan Hummel</h4>
+              <span>Head Developer</span>
+              <p>
+                Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis quaerat qui aut aut
+                aut
+              </p>
+              <div class="social">
+                <a href="https://github.com/github4touchdouble"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/realjanhummel/"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Team Member -->
+
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="member">
+            <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+            <div class="member-content">
+              <h4>Carlo Bortolan</h4>
+              <span>Head Developer</span>
+              <p>
+                Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum rerum temporibus
+              </p>
+              <div class="social">
+                <a href="https://github.com/carlobortolan"><i class="bi bi-github"></i></a>
+                <a href="https://www.linkedin.com/in/carlobortolan/"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Team Member -->
+
+      </div>
+
+    </div>
+  </section><!-- End Our Team Section -->
+
+
+</main><!-- End #main -->
+
+
+<div id="preloader"></div>
+

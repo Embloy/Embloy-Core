@@ -1,0 +1,265 @@
+<main id="main">
+  <%= javascript_include_tag 'trix' %>
+  <%= stylesheet_link_tag 'trix' %>
+
+  <%= form_with model: @job do |form| %>
+
+    <div class="jobform transparent-bg ">
+      <div class="page-header d-flex align-items-center ">
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <section id="detail_information" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="container rounded">
+          <div class="row justify-content-center">
+            <div class="col-lg-4">
+              <div class="mb-3 mt-3">
+                <%= form.label :title, "Job Title", class: 'form-label' %>
+                <%= form.text_field :title, placeholder: "Enter your job title", class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="mb-3 mt-3">
+                <%= form.label :job_type, "Job Type", class: 'form-label' %>
+                <%= form.select :job_type, @categories_list, { prompt: "Select a job category" }, class: "form-select" %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="mb-3 mt-3">
+                <%= form.label :start_slot, "Start Slot", class: 'form-label' %>
+                <%= form.datetime_field :start_slot, class: "form-control", required: true, value: Time.now.strftime("%Y-%m-%dT%H:%M") %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-4" data-aos="fade-up">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"/>
+        <style>
+            #mapid {
+                border: 0;
+                width: 100%;
+                height: 340px;
+            }
+        </style>
+        <div id="mapid" class="rounded"></div>
+        <script>
+            var latitude = <%= @job.latitude.nil? ? 47.376419 : @job.latitude %>;
+            var longitude = <%= @job.longitude.nil? ? 8.548307 : @job.longitude %>;
+            var southWest = L.latLng(-90, -180);
+            var northEast = L.latLng(90, 180);
+            var bounds = L.latLngBounds(southWest, northEast);
+
+            var map = L.map('mapid', {
+                maxBounds: bounds,
+                maxBoundsViscosity: 1.0
+            }).setView([latitude, longitude], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+                maxZoom: 18,
+                tileSize: 512,
+                zoomOffset: -1
+            }).addTo(map);
+            var marker = L.marker([latitude, longitude]).addTo(map);
+
+            function onMapClick(e) {
+                marker.setLatLng(e.latlng);
+                document.getElementById('longitude').value = e.latlng.lng;
+                document.getElementById('latitude').value = e.latlng.lat;
+                var url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + e.latlng.lat + "&lon=" + e.latlng.lng;
+                console.log("Request URL:", url);
+                fetch(url)
+                    .then(response => {
+                        console.log("Response Status:", response.status);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Response Data:", data);
+                        var address = data.display_name;
+                        document.getElementById("address").innerHTML = address;
+                    })
+                    .catch(error => console.error(error));
+            }
+
+            map.on('click', onMapClick);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const cvRequiredCheckbox = document.getElementById("cv_required_checkbox");
+                const cvFormatOptions = document.getElementById("cv_format_options");
+
+                cvRequiredCheckbox.addEventListener("change", function () {
+                    cvFormatOptions.style.display = this.checked ? "block" : "none";
+                });
+            });
+
+        </script>
+
+
+        <div class="container">
+          <div class="row gy-4 mt-4 rounded">
+
+            <div class="col-lg-4">
+              <div class="info-item d-flex">
+                <i class="bi bi-geo-alt flex-shrink-0"></i>
+                <div>
+                  <h4>Location:</h4>
+                  <p id="address">
+                    <% if @job.address.nil? %>
+                      ETH Zürich, Zentrum, Spöndlistrasse, Oberstrass, Kreis 6, Zurich, District Zurich,
+                      Zurich, 8091, Switzerland
+                    <% else %>
+                      <%= @job.address %>
+                    <% end %></p>
+                  <% form.text_field :address, id: "address", required: true %><br>
+                </div>
+              </div><!-- End Info Item -->
+              <div class="info-item d-flex">
+                <i class="bi bi-envelope flex-shrink-0"></i>
+                <div>
+                  <h4>Email:</h4>
+                  <p><%= Current.user.email %></p>
+                </div>
+              </div><!-- End Info Item -->
+              <div class="info-item d-flex">
+                <i class="bi bi-person flex-shrink-0"></i>
+                <div>
+                  <h4>Your Name:</h4>
+                  <p><%= Current.user.full_name %></p>
+                </div>
+              </div><!-- End Info Item -->
+            </div>
+            <div class="col-lg-8">
+              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <%= form.text_field :position, placeholder: "Job position", class: "form-control", required: true %>
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <%= form.text_field :key_skills, class: "form-control-1", placeholder: "Required skills", class: "form-control", required: true %>
+                  </div>
+                </div>
+                <div class="row mt-1">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <%= form.label :duration, "Duration (in days)", class: 'form-label' %>
+                      <%= form.number_field :duration, placeholder: "Duration in days", class: "form-control", required: true, min: 1, step: 1, max: 365, pattern: "\d+" %>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <%= form.label :salary, "Salary", class: 'form-label' %>
+                      <%= form.number_field :salary, placeholder: "Salary", class: "form-control", required: true, min: 1, max: 1000000, step: 1, pattern: "\d+" %>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <%= form.label :currency, "Currency", class: 'form-label' %>
+                      <%= form.text_field :currency, value: "EUR", placeholder: "EUR", class: "form-control", required: true, disabled: true %>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <p><%= form.rich_text_area :description, placeholder: "Write your job description here.", required: true, minlength: 10, maxlength: 1000 %>
+                  <div class="mb-3">
+                    <%= form.label :image_url, "Upload Image", class: 'form-label' %>
+                    <%= form.file_field :image_url, required: true, accept: 'image/png, image/jpeg, image/jpg', class: "form-control" %>
+                    <small class="form-text text-muted">Accepted formats: .png, .jpeg, .jpg</small>
+                  </div>
+                </div>
+              </form>
+              <% if @job.image_url.attached? %>
+                <%= button_to remove_job_image_path(@job), method: :delete, data: { confirm: "Are you sure you want to remove the job's image?" }, class: "btn btn-danger btn-sm", title: "Remove job image" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              <% end %>
+              <%= form.label "Do you want to receive a notification when a new application is submitted?" %>
+              <%= form.check_box :job_notifications %><br>
+
+              <div>
+                <%= form.label "Do you want to require applicants to submit a CV?" %>
+                <%= form.hidden_field :cv_required, value: 'false' %>
+                <%= form.check_box :cv_required, id: "cv_required_checkbox" %>
+
+                <div id="cv_format_options" style="display: none;">
+                  <%= form.label "Select allowed CV formats:" %>
+                  <%= form.collection_check_boxes :allowed_cv_format, @allowed_cv_formats, :to_s, :to_s do |format| %>
+                    <%= form.hidden_field format, value: 'false' %>
+                    <div class="collection-check-box">
+                      <%= format.check_box %>
+                      <%= format.label %>
+                    </div>
+                  <% end %>
+                  <div class="error" id="allowed_cv_format_error" style="color: red; display: none;">
+                    Please select at least one CV format.
+                  </div>
+                </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const cvRequiredCheckbox = document.getElementById("cv_required_checkbox");
+                        const cvFormatOptions = document.getElementById("cv_format_options");
+                        const cvFormatError = document.getElementById("allowed_cv_format_error");
+
+                        cvRequiredCheckbox.addEventListener("change", function () {
+                            cvFormatOptions.style.display = this.checked ? "block" : "none";
+                            if (this.checked) {
+                                validateCvFormatSelection();
+                            }
+                        });
+
+                        function validateCvFormatSelection() {
+                            const selectedFormats = document.querySelectorAll("input[name='job[allowed_cv_format][]']:checked");
+                            if (cvRequiredCheckbox.checked && selectedFormats.length === 0) {
+                                cvFormatError.style.display = "block";
+                                return false;
+                            } else {
+                                cvFormatError.style.display = "none";
+                                return true;
+                            }
+                        }
+
+                        const form = document.querySelector("form");
+                        form.addEventListener("submit", function (event) {
+                            if (!validateCvFormatSelection()) {
+                                event.preventDefault();
+                            }
+                        });
+                    });
+                </script>
+              </div>
+            </div><!-- End Contact Form -->
+
+          </div>
+          <div class="row gy-4 mt-4">
+            <%= form.submit %>
+            <div>
+              <%= form.label :status %><br>
+              <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+            </div>
+            <div>
+              <%= form.label :longitude, for: "longitude" %><br>
+              <%= form.text_field :longitude, id: "longitude", required: true %><br>
+              <%= form.label :latitude, for: "latitude" %><br>
+              <%= form.text_field :latitude, id: "latitude", required: true %><br>
+            </div>
+            <% if @job.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@job.errors.count, "error") %> prohibited this job from being saved:</h2>
+                <ul>
+                  <% @job.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+          </div>
+    </section><!-- End Contact Section -->
+    <div>
+    </div>
+    </div>
+  <% end %>
+</main>
+<div id="preloader"></div>

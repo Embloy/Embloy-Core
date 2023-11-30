@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag "style" %>
+<%= form_with model: review do |form| %>
+  <div>
+    <%= form.label :rating %><br>
+    <%= form.text_field :rating %>
+    <% job.errors.full_messages_for(:rating).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :message %><br>
+    <%= form.text_area :message %><br>
+    <% job.errors.full_messages_for(:message).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :start_slot %><br>
+    <%= form.datetime_field :start_slot %><br>
+    <% job.errors.full_messages_for(:start_slot).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<mxfile host="app.diagrams.net" modified="2023-04-19T20:47:08.265Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="PYSfUnGLrk92afhti5oU" version="21.2.0">
+  <diagram name="Seite-1" id="B-0MqViY6moOxsePs2qf">
+    <mxGraphModel dx="1803" dy="947" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xbTyxm1S9Jf8TehZvXuA-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;strokeColor=none;fillColor=#000000;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="405" y="130" width="580" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="29u3FnGBsUduHhZAB-Hl-19" value="" style="group;shadow=0;fillColor=none;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="440" y="180" width="580" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="29u3FnGBsUduHhZAB-Hl-2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFFFFF;gradientColor=none;" parent="29u3FnGBsUduHhZAB-Hl-19" vertex="1">
+          <mxGeometry x="25" y="10" width="460" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="29u3FnGBsUduHhZAB-Hl-16" value="" style="shape=or;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=none;rotation=-90;" parent="29u3FnGBsUduHhZAB-Hl-19" vertex="1">
+          <mxGeometry x="177.32999999999998" y="62.35" width="155.34" height="217.65" as="geometry" />
+        </mxCell>
+        <mxCell id="29u3FnGBsUduHhZAB-Hl-17" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#99F7CB;strokeColor=none;arcSize=50;gradientColor=#99FFFF;gradientDirection=east;" parent="29u3FnGBsUduHhZAB-Hl-19" vertex="1">
+          <mxGeometry x="145" y="280" width="220" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,99 @@
+<style>
+    body {
+        background-color: #6200EA;
+        color: #000;
+        overflow-x: hidden;
+    }
+
+    .card {
+        margin: auto;
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    .pic1 {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .product-pic {
+        padding-left: auto;
+        padding-right: auto;
+        width: 100%;
+    }
+
+    .card-1 {
+        padding: 30px 30px 20px 30px !important;
+        border: none;
+        width: 375px;
+    }
+
+    .price {
+        font-size: 18px;
+    }
+
+    .sm-text {
+        font-size: 14px;
+    }
+</style>
+<div class="container-fluid px-sm-1 py-1 mx-auto">
+  <div class="row justify-content-center">
+    <div class="d-flex">
+      <div class="card card-1">
+        <div class="text-center stretched-link px-1">
+
+          <small class="text-muted">
+            <%= job.start_slot.getlocal.asctime %></small>
+          <h4 class="card-title"><%= job.title %></h4>
+        </div>
+        <div class="row justify-content-end">
+          <div class="product-pic">
+            <!-- Google AdSense Banner -->
+            <div style="width:100%;max-width:600px;margin:auto">
+              <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+              <!-- Your Ad Unit Name -->
+              <!--              <ins class="adsbygoogle"-->
+              <!--                   style="display:block"-->
+              <!--                   data-ad-client="your-client-id"-->
+              <!--                   data-ad-slot="your-slot-id"-->
+              <!--                   data-ad-format="auto"-->
+              <!--                   data-full-width-responsive="true"></ins>-->
+              <!--              <script>-->
+              <!--                  (adsbygoogle = window.adsbygoogle || []).push({});-->
+              <!--              </script>-->
+              <div style="background-color: #f5f5f5; border: 1px solid #ccc; padding: 5px;">
+                <div style="font-size: 14px; font-weight: bold; margin-bottom: 5px;">Advertisement</div>
+                <div style="text-align: center;">
+                  <img src="https://via.placeholder.com/300x250" alt="Ad Placeholder" style="max-width: 100%; height: auto;">
+                </div>
+                <div style="font-size: 12px; margin-top: 5px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Donec viverra augue vitae massa eleifend, sit amet placerat est consequat. Nulla luctus pharetra arcu
+                  ac ullamcorper.
+                </div>
+                <div style="font-size: 11px; color: #999; margin-top: 5px;">Ad by Your Company</div>
+              </div>
+            </div>
+          </div>
+          <div class="row px-1 justify-content-between">
+            <header class="text-center content-center pt-1 pb-2">
+              <small class="text-muted"><i class="bi bi-clock-fill mr-1"></i><%= job.time_left %></small>
+              <a class="badge bg-secondary text-decoration-none link-light" href="#!"><%= job.job_type %></a>
+            </header>
+            <h4><%= "TEST AD" %></h4>
+          </div>
+          <div class="card-footer p-1 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a href="<%= job_path(job) %>" class="readmore">
+                <span>apply</span>
+                <i class="bi bi-arrow-right stretched-link"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

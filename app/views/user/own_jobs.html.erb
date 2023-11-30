@@ -1,0 +1,38 @@
+<section id="hero" class="hero d-flex align-items-center">
+
+  <div class="container">
+    <h2>Your Jobs</h2>
+    <% if !@jobs.nil? %>
+      <h3>You have created <%= @jobs.count %> jobs! - <%= link_to "Create new job", new_job_path %></h3>
+    <% else %>
+      <h3>You have not created any jobs yet! - <%= link_to "Create new job here!", new_job_path %></h3>
+    <% end %>
+
+  </div>
+</section>
+
+<!-- Section-->
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li><a href="<%= profile_index_path %>">My Profile</a></li>
+        <li>My Jobs</li>
+      </ol>
+    </div>
+  </nav>
+</div><!-- End Breadcrumbs -->
+
+
+<!-- Section-->
+<div class="container px-3 px-lg-5 mt-5 text-dark">
+  <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-center" data-aos="fade-up">
+    <% @jobs.each do |job| %>
+      <%= render "jobs/own_posting", job: job %>
+    <% end %>
+  </div>
+</div>
+
+<div id="preloader"></div>

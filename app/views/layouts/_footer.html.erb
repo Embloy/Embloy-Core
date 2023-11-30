@@ -1,0 +1,65 @@
+<!-- ======= Footer ======= -->
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+<footer id="footer" class="footer">
+
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-lg-5 col-md-12 footer-info">
+        <a href="<%= root_path %>" class="logo d-flex align-items-center">
+          <span>Embloy</span>
+        </a>
+        <p>The best application to quickly find a fitting job for you or spontaneously provide work-opportunities to
+          others.</p>
+        <div class="social-links d-flex mt-4">
+          <a href="https://www.linkedin.com/company/embloy/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/embloy" class="github"><i class="bi bi-github"></i></a>
+          <a href="https://twitter.com/embloy_official" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="https://www.instagram.com/embloy_official/" class="instagram"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-6 footer-links">
+        <h4>Useful Links</h4>
+        <ul>
+          <li><%= link_to "About us", "https://about.embloy.com" %></li>
+          <li><%= link_to "API", api_path %></li>
+          <li><%= link_to "Privacy Policy", privacy_policy_path %></li>
+          <li><%= link_to "Terms of Service", terms_of_service_path %></li>
+          <li><%= link_to "Need help?", help_path %></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-2 col-6 footer-links">
+        <h4>Our Services</h4>
+        <ul>
+          <li><%= link_to "Sign in", sign_in_path %></li>
+          <li><%= link_to "Sign up", sign_up_path %></li>
+          <li><%= link_to "Your Feed", jobs_path %></li>
+          <li><%= link_to "Create new Job", new_job_path %></li>
+          <li><%= link_to "Search all Jobs", jobs_find_path %></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+        <h4>Contact Us</h4>
+        <p>
+          Munich<br>
+          Germany<br><br>
+          <strong>Email:</strong> <%= ENV["EMAIL_INFO_USER"] %><br>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container mt-4">
+    <div class="copyright">
+      &copy; <strong><span><%= "#{Time.current.year} Jan Hummel, Carlo Bortolan" %></span></strong>.
+      All Rights Reserved
+    </div>
+  </div>
+</footer><!-- End Footer -->
+<!-- End Footer -->

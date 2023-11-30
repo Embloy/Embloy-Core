@@ -1,0 +1,107 @@
+<% unless false %>
+
+  <div class="col mb-5">
+    <% if @application.status == '-1' %>
+      <div class="col mb-5 primary bg-danger" style="padding: 10px; border: 1px solid lightgray">
+    <% elsif @application.status == '1' %>
+      <div class="col mb-5 primary bg-success" style="padding: 10px; border: 1px solid lightgray">
+    <% else %>
+      <div class="col mb-5 primary bg-light" style="padding: 10px; border: 1px solid lightgray">
+    <% end %>
+
+    <div class="card h-100">
+      <div class="card-body p-4 ">
+        <div class="text-center ">
+          <h5 class="fw-bolder"><%= @application.user.full_name %></h5>
+          <p class="card-text"><%= @application.application_text %></p>
+          <%
+            @attachment = ApplicationAttachment.find_by(user_id: @application.user_id, job_id: @application.job_id)
+          %>
+          <% unless @attachment.nil? || @attachment.cv.nil? %>
+            <div>
+              <%= link_to "Download CV", rails_blob_path(@attachment.cv, disposition: "attachment"), class: "btn btn-primary" %>
+            </div>
+          <% end %>
+          <br>
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#acceptModal<%= @application.user_id %>" data-whatever="<%= @application.user.email %>">Accept
+          </button>
+          <div class="modal fade" id="acceptModal<%= @application.user_id %>" tabindex="-1" role="dialog" aria-labelledby="acceptModal<%= @application.user_id %>Label" aria-hidden="true">
+            <%= form_with model: @application, url: job_application_accept_path(@job, @application.user_id) do |f| %>
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="acceptModal<%= @application.user_id %>Label">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="<%= @application.user.email %>" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Feedback:</label>
+                        <%= f.text_area :response, type: "text", class: "form-control", default: "ACCEPTED", maxlength: 500 %>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <%=
+                      f.submit "Send message", class: "btn btn-primary", method: :patch
+                    %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectModal<%= @application.user_id %>" data-whatever="<%= @application.user.email %>">Reject
+          </button>
+          <div class="modal fade" id="rejectModal<%= @application.user_id %>" tabindex="-1" role="dialog" aria-labelledby="rejectModal<%= @application.user_id %>Label" aria-hidden="true">
+            <%= form_with model: @application, url: job_application_reject_path(@job, @application.user_id) do |f| %>
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="rejectModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name" placeholder="<%= @application.user.email %>" disabled>
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="col-form-label">Feedback:</label>
+                        <%= f.text_area :response, type: "text", class: "form-control", default: "REJECTED", maxlength: 500 %>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <%=
+                      f.submit "Send message", class: "btn btn-primary", method: :patch
+                    %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+          <p class="card-text">
+            <i><b> <%= @application.response.nil? ? "Not response yet ..." : @application.response %></b></i></p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted"><%= @application.updated_at %></small>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+<% end %>

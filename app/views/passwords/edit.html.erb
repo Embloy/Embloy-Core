@@ -1,0 +1,25 @@
+<h1>Edit Password</h1>
+
+<%= form_with model: Current.user, url: edit_password_path do |f| %>
+  <div class="col-md-5 mb-3">
+    <label for="inputPassword">Password</label>
+    <%= f.password_field :password, type: "password", class: "form-control form-control-lg", id: 'inputPassword', placeholder: "password", required: true, minlength: 8, maxlength: 72 %>
+    <small id="passwordHelpInline" class="text-muted">
+      Must be between 8 and 72 characters long.
+    </small><br>
+    <label for="inputPassword_repeat">Password confirmation</label>
+    <%= f.password_field :password_confirmation, type: "password", class: "form-control form-control-lg", id: 'inputPassword_repeat', placeholder: "password confirmation", required: true, minlength: 8, maxlength: 72, oninput: "check()" %>
+    <script>
+        function check() {
+            var input = document.getElementById('inputPassword_repeat');
+            if (input.value !== document.getElementById('inputPassword').value) {
+                input.setCustomValidity('Password must be matching.');
+            } else {
+                // input is valid -- reset the error message
+                input.setCustomValidity('');
+            }
+        }</script>
+    <br>
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>

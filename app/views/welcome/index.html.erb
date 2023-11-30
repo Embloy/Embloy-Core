@@ -1,0 +1,696 @@
+<% if Current.user %>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+    <div class="container">
+      <div class="row gy-4 d-flex justify-content-between">
+        <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
+          <h2 data-aos="fade-up">Embloy yourself!</h2>
+          <p data-aos="fade-up" data-aos-delay="100">The best application to quickly find a fitting job for you or
+            spontaneously provide work-opportunities to others.</p>
+
+          <form action="<%= jobs_find_path %>" method="get" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
+            <input type="text" class="form-control" placeholder="ZIP, city or keywords" name="query" style="height: 60px">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+
+          <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
+
+            <div class="col-lg-3 col-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end=<%= User.count %> data-purecounter-duration="1" class="purecounter"></span>
+                <p>Clients</p>
+              </div>
+            </div><!-- End Stats Item -->
+
+            <div class="col-lg-3 col-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end=<%= Job.count %> data-purecounter-duration="1" class="purecounter"></span>
+                <p>Jobs</p>
+              </div>
+            </div><!-- End Stats Item -->
+
+            <div class="col-lg-3 col-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end=<%= Application.count %> data-purecounter-duration="1" class="purecounter"></span>
+                <p>Applications</p>
+              </div>
+            </div><!-- End Stats Item -->
+
+            <div class="col-lg-3 col-6">
+              <div class="stats-item text-center w-100 h-100">
+                <span data-purecounter-start="0" data-purecounter-end=<%= CompanyUser.count %> data-purecounter-duration="1" class="purecounter"></span>
+                <p>Companies</p>
+              </div>
+            </div><!-- End Stats Item -->
+
+          </div>
+        </div>
+
+        <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+          <!--<img src="assets/img/hero-logo-img.png" class="img-fluid mb-3 mb-lg-0" alt="">-->
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero Section -->
+
+<% else %>
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">EMBLOY</h1>
+          <h2 data-aos="fade-up" data-aos-delay="400">We broker casual jobs creating a fun way for people to make money
+            spontaneously.</h2>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="<%= sign_in_path %>" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get Started</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-logout-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="assets/img/hero-logout-img.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+  <style>
+
+      /*--------------------------------------------------------------
+  # Hero Section
+  --------------------------------------------------------------*/
+      .hero {
+          width: 100%;
+          height: 100vh;
+          background: url(../img/hero-bg.png) top center no-repeat;
+          background-size: cover;
+      }
+
+      .hero h1 {
+          margin: 0;
+          font-size: 48px;
+          font-weight: 700;
+          color: #012970;
+      }
+
+      .hero h2 {
+          color: #444444;
+          margin: 15px 0 0 0;
+          font-size: 26px;
+      }
+
+      .hero .btn-get-started {
+          margin-top: 30px;
+          line-height: 0;
+          padding: 15px 40px;
+          border-radius: 4px;
+          transition: 0.5s;
+          color: #fff;
+          background: #4154f1;
+          box-shadow: 0px 5px 30px rgba(65, 84, 241, 0.4);
+      }
+
+      .hero .btn-get-started span {
+          font-family: "Nunito", sans-serif;
+          font-weight: 600;
+          font-size: 16px;
+          letter-spacing: 1px;
+      }
+
+      .hero .btn-get-started i {
+          margin-left: 5px;
+          font-size: 18px;
+          transition: 0.3s;
+      }
+
+      .hero .btn-get-started:hover i {
+          transform: translateX(5px);
+      }
+
+      .hero .hero-img {
+          text-align: right;
+      }
+
+      @media (min-width: 1024px) {
+          .hero {
+              background-attachment: fixed;
+          }
+      }
+
+      @media (max-width: 991px) {
+          .hero {
+              height: auto;
+              padding: 120px 0 60px 0;
+          }
+
+          .hero .hero-img {
+              text-align: center;
+              margin-top: 80px;
+          }
+
+          .hero .hero-img img {
+              width: 80%;
+          }
+      }
+
+      @media (max-width: 768px) {
+          .hero {
+              text-align: center;
+          }
+
+          .hero h1 {
+              font-size: 32px;
+          }
+
+          .hero h2 {
+              font-size: 24px;
+          }
+
+          .hero .hero-img img {
+              width: 100%;
+          }
+      }
+
+
+  </style>
+
+<% end %>
+
+
+<main id="main">
+
+  <!-- ======= Featured Services Section ======= -->
+  <section id="featured-services" class="featured-services">
+    <div class="container">
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up">
+          <div class="icon flex-shrink-0"><i class="fa-solid fa-user"></i></div>
+          <div>
+            <h4 class="title">Create an account</h4>
+            <p class="description">We just need your email, name and a password</p>
+            <a href="<%= sign_up_path %>" class="readmore stretched-link">
+              <span>Start right away</span>
+              <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+        <!-- End Service Item -->
+
+        <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="100">
+          <div class="icon flex-shrink-0"><i class="fa-solid fa-sliders"></i></div>
+          <div>
+            <h4 class="title">Select your preferences</h4>
+            <p class="description">Give us a short overview of what you're looking for so that we can tailor your feed
+              to your skills.</p>
+            <a href="<%= preferences_path %>" class="readmore stretched-link">
+              <span>Takes less than 5 mins</span>
+              <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div><!-- End Service Item -->
+
+        <div class="col-lg-4 col-md-6 service-item d-flex" data-aos="fade-up" data-aos-delay="200">
+          <div class="icon flex-shrink-0"><i class="fa-solid fa-search"></i></div>
+          <div>
+            <h4 class="title">That's it!</h4>
+            <p class="description">You're ready to start looking for new career opportunities, good luck!</p>
+            <a href="<%= jobs_find_path %>" class="readmore stretched-link">
+              <span>See all available jobs</span>
+              <i class="bi bi-arrow-right"></i></a>
+          </div>
+        </div><!-- End Service Item -->
+
+      </div>
+
+    </div>
+  </section><!-- End Featured Services Section -->
+
+  <!-- ======= Services Section ======= -->
+  <section id="service" class="services pt-0">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <span>Our Services</span>
+        <h2>Our Services</h2>
+
+      </div>
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/service_1.png" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= new_job_path %>" class="stretched-link">Easy job listing</a></h3>
+            <p>We simplify the process of creating and posting job listings, helping employers save time and reach a
+              wider
+              pool of qualified candidates</p>
+          </div>
+        </div><!-- End Card Item -->
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/service_2.png" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= own_applications_path %>" class="stretched-link">Uncomplicated application</a></h3>
+            <p>Take your career to the next level and discover new opportunities for growth and development by applying
+              to many interesting new jobs without having to waste any time.</p>
+          </div>
+        </div><!-- End Card Item -->
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/service_3.png" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= jobs_path %>" class="stretched-link">Intelligent feed</a></h3>
+            <p>Our algorithm helps you save time and effort by providing personalized job recommendations and
+              helpful resources that are tailored to their individual needs and preferences</p>
+          </div>
+        </div><!-- End Card Item -->
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/service_4.png" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= "https://about.embloy.com" %>" class="stretched-link">Italian Uber Model</a></h3>
+            <p>We are simply intermediaries and we do not get involved 100% in the employment relationship between the
+              employer and the employee.</p>
+          </div>
+        </div><!-- End Card Item -->
+
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/packaging-service.jpg" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= "https://about.embloy.com" %>" class="stretched-link">Open source</a></h3>
+            <p>Worried about your data? We provide 100% transparency: Everybody is able to access our code and find out
+              for themselves how we use your data.</p>
+          </div>
+        </div><!-- End Card Item -->
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="card">
+            <div class="card-img">
+              <img src="assets/img/warehousing-service.jpg" alt="" class="img-fluid">
+            </div>
+            <h3><a href="<%= "https://about.embloy.com" %>" class="stretched-link">Soon also as a mobile app</a></h3>
+            <p>Don't want to have to use your browser to find new opportunities? Don't worry, soon you'll be able to
+              browse through your feed and finding a new job while laying on your sofa using embloy-mobile.</p>
+          </div>
+        </div><!-- End Card Item -->
+
+      </div>
+
+    </div>
+  </section><!-- End Services Section -->
+
+
+  <!-- ======= Call To Action Section ======= -->
+  <section id="call-to-action" class="call-to-action">
+    <div class="container" data-aos="zoom-out">
+
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h3>Create a new job posting</h3>
+          <p> Don't waste any time and start to find the best employee for your business. <br>
+            <%= link_to "Submit job offering", jobs_path, class: "cta-btn" %>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Call To Action Section -->
+
+  <!-- ======= Features Section ======= -->
+  <section id="features" class="features">
+    <div class="container">
+
+      <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+
+        <div class="col-md-5">
+          <img src="assets/img/features_1.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7">
+          <h3>Ultra accessible feed.</h3>
+          <p class="fst-italic">
+            Log into your account and browse with ease through your personalized feed to find your next job opportunity
+            with one click.
+          </p>
+          <ul>
+            <li><i class="bi bi-check"></i> Fast.</li>
+            <li><i class="bi bi-check"></i> Uncomplicated.</li>
+            <li><i class="bi bi-check"></i> Easy to use.</li>
+          </ul>
+        </div>
+      </div><!-- Features Item -->
+
+      <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+        <div class="col-md-5 order-1 order-md-2">
+          <img src="assets/img/features_2.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 order-2 order-md-1">
+          <h3>Screen as many jobs as possible, as quickly as possible </h3>
+          <p class="fst-italic">
+            Newly improved, and full of handy functions, our company dashboard will assist you to find the best employee
+            for your business! - Head over to your profile and finish the last configuration steps.</p>
+        </div>
+      </div><!-- Features Item -->
+
+      <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+        <div class="col-md-5">
+          <img src="assets/img/features_3.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7">
+          <h3>Easy to Use & Customize</h3>
+          <p>We want you to help you find a new job as soon as possible. But, to find jobs that match your preferences
+            we first need some information.</p>
+          <ul>
+            <li><i class="bi bi-check"></i> Start off by adding a profile image.</li>
+            <li><i class="bi bi-check"></i> Tell us about yourself by completing
+              the <%= link_to "individualization process", preferences_path %>.
+            </li>
+            <li><i class="bi bi-check"></i> Upload additional documents (premium only).</li>
+          </ul>
+        </div>
+      </div><!-- Features Item -->
+
+      <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
+        <div class="col-md-5 order-1 order-md-2">
+          <img src="assets/img/features_4.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 order-2 order-md-1">
+          <h3>Contribute to our project</h3>
+          <p class="fst-italic">
+            We welcome your contribution to our project! Please visit
+            our <%= link_to "GitHub page", "https://github.com/embloy" %> to submit issues, report
+            bugs, and suggest improvements that will help us enhance our services.
+            <br>
+            By contributing to our project, you will have the opportunity to collaborate with our team of developers and
+            improve the quality of our services. We value your input and feedback, and we are committed to working
+            together to create a better experience for our users. </p>
+        </div>
+      </div><!-- Features Item -->
+
+    </div>
+  </section><!-- End Features Section -->
+
+  <!-- ======= Pricing Section ======= -->
+  <section id="pricing" class="pricing pt-0">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <span>Pricing</span>
+        <h2>Pricing</h2>
+
+      </div>
+
+      <div class="row gy-4">
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="pricing-item">
+            <h3>Free Plan</h3>
+            <h4><sup>$</sup>0<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> Full job-feed accessibility</li>
+              <li><i class="bi bi-check"></i> Unlimited number of applications</li>
+              <li><i class="bi bi-check"></i> Unlimited number of job-listings</li>
+              <li class="na"><i class="bi bi-x"></i> <span>No ads</span></li>
+              <li class="na"><i class="bi bi-x"></i> <span>Full customizable profile</span></li>
+            </ul>
+            <a href="https://paypal.me/carlobortolan" class="buy-btn">Buy Now</a>
+          </div>
+        </div><!-- End Pricing Item -->
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="pricing-item featured">
+            <h3>Business Plan</h3>
+            <h4><sup>$</sup>29<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> Full job-feed accessibility</li>
+              <li><i class="bi bi-check"></i> Unlimited number of applications</li>
+              <li><i class="bi bi-check"></i> Unlimited number of job-listings</li>
+              <li><i class="bi bi-check"></i> No ads</li>
+              <li class="na"><i class="bi bi-x"></i> <span>extended CVs</span></li>
+            </ul>
+            <a href="https://paypal.me/carlobortolan" class="buy-btn">Buy Now</a>
+          </div>
+        </div><!-- End Pricing Item -->
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="pricing-item">
+            <h3>Premium Plan</h3>
+            <h4><sup>$</sup>49<span> / month</span></h4>
+            <ul>
+              <li><i class="bi bi-check"></i> Full job-feed accessibility</li>
+              <li><i class="bi bi-check"></i> Unlimited number of applications</li>
+              <li><i class="bi bi-check"></i> Unlimited number of job-listings</li>
+              <li><i class="bi bi-check"></i> No ads</li>
+              <li><i class="bi bi-check"></i> extended CVs</li>
+            </ul>
+            <a href="https://paypal.me/carlobortolan" class="buy-btn">Buy Now</a>
+          </div>
+        </div><!-- End Pricing Item -->
+
+      </div>
+
+    </div>
+  </section><!-- End Pricing Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+
+      <div class="slides-1 swiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+              <h3>Gordon Gecko</h3>
+              <h4>Ceo &amp; Founder</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Let me tell you something, folks. Embloy is the real deal. It's efficient,
+                it's fast, and it's got the inside track on the best job opportunities out there. I've been in the game
+                a long time, and I've never seen anything like it. With this service, I can find the best jobs, in the
+                best locations, with the best companies, all at the touch of a button. It's like having a personal
+                assistant who's always got your back. Trust me, folks, if you're serious about your career, you need to
+                check out this online job broker webservice. It's the future of job hunting, and I'm all in.
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+              <h3>Patrick Bateman</h3>
+              <h4>Batman, but with spreadsheets and a suit</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                I've used Embloy to land some of the most prestigious jobs out there,
+                and I've never been disappointed. The algorithm is so precise that it knows exactly what I'm looking
+                for, and it delivers every time. It's a no-brainer, folks, if you want to succeed in this cutthroat
+                world, you need this online job broker webservice in your arsenal. It's a game-changer, and I wouldn't
+                trust anyone else to help me navigate the job market. <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+              <h3>Chris Shiherlis</h3>
+              <h4>Robin Hood, but instead of giving to the poor, he gives to himself</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                The feed is so on-point, it's like it knows what I want before I even know it. And the best part? It's
+                all in one place. No more searching through a million different job boards or websites. It's all right
+                there, waiting for you to make your move. <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+              <h3>Tony Montana</h3>
+              <h4>Freelancer, also known as Cuban Santa Claus, except instead of presents, he delivers cocaine </h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                Embloy is like having a secret weapon in your job search arsenal. The feed is so finely-tuned, it's like
+                it's
+                reading your mind. It delivers job listings tailored specifically to your experience, skills, and career
+                goals. And let me tell you, the opportunities it surfaces are top-notch. The cream of the crop. The best
+                of the best. I've landed multiple job offers thanks to this service, and I wouldn't have even known
+                about them otherwise. It's the kind of service that separates the winners from the losers in the job
+                market. If you're serious about your career, you owe it to yourself to give it a try.
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+              <h3>Bitcoin Bro</h3>
+              <h4>Currently unemployed</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                🤑👨‍💻🚀 This online job broker webservice is 🔥! It's like a decentralized network for job listings,
+                powered by AI algorithms. The feed is constantly updated with fresh job opportunities on the blockchain,
+                so you know it's legit. 💯 Plus, the more you use it, the more tokens you earn. 🤑💰 It's a total win-win,
+                bro. Get your dream job and make some serious crypto at the same time. 🙌🏼 Don't sleep on this platform,
+                it's the future of job searching. 🚀🌕
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+  </section><!-- End Testimonials Section -->
+
+  <!-- ======= Frequently Asked Questions Section ======= -->
+  <section id="faq" class="faq">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <span>Frequently Asked Questions</span>
+        <h2>Frequently Asked Questions</h2>
+
+      </div>
+
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+        <div class="col-lg-10">
+
+          <div class="accordion accordion-flush" id="faqlist">
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                  <i class="bi bi-question-circle question-icon"></i>
+                  What happens with my data?
+                </button>
+              </h3>
+              <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                <div class="accordion-body">
+                  We sell it.
+                </div>
+              </div>
+            </div><!-- # Faq item-->
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                  <i class="bi bi-question-circle question-icon"></i>
+                  Do I need to create a new account?
+                </button>
+              </h3>
+              <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                <div class="accordion-body">
+                  To access your profile and apply for new jobs you can choose
+                  between <%= link_to "creating a new account", sign_up_path %> or
+                  <%= link_to "sign in with your Google or GitHub account", sign_in_path %>.
+                </div>
+              </div>
+            </div><!-- # Faq item-->
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                  <i class="bi bi-question-circle question-icon"></i>
+                  How is the feed generated?
+                </button>
+              </h3>
+              <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                <div class="accordion-body">
+                  The generation of the feed is a vital component of our platform and app, aimed at providing you with
+                  the most personalized and enjoyable experience possible. Our state-of-the-art algorithms analyze your
+                  user data, such as your search history, profile information, and previous interactions, to generate a
+                  feed of content that is tailored to your interests and preferences.
+                  <br class="mb-2">
+                  By constantly analyzing your feedback, engagement, and interactions, our feed generation process is
+                  designed to continuously improve over time, providing you with even more accurate and relevant content
+                  that meets your evolving needs and interests.
+                  <br class="mb-2">
+                  Our goal is to create a platform and app that feels like it's been tailor-made just for you, providing
+                  you with content that's not only informative but also fun and engaging. So sit back, relax, and enjoy
+                  your personalized feed of content, knowing that we're constantly working to make your experience even
+                  better.
+                </div>
+              </div>
+            </div><!-- # Faq item-->
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                  <i class="bi bi-question-circle question-icon"></i>
+                  Where can I report issues?
+                </button>
+              </h3>
+              <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                <div class="accordion-body">
+                  Simply <%= link_to "submit a new issue", "https://github.com/embloy/embloy-backend/issues/new" %> to
+                  the project.
+                </div>
+              </div>
+            </div><!-- # Faq item-->
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
+                  <i class="bi bi-question-circle question-icon"></i>
+                  How can I contribute to the project?
+                </button>
+              </h3>
+              <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                <div class="accordion-body">
+                  Have a look at
+                  our <%= link_to "GitHub repository", "https://github.com/embloy" %>.
+                </div>
+              </div>
+            </div><!-- # Faq item-->
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Frequently Asked Questions Section -->
+
+</main><!-- End #main -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<div id="preloader"></div>

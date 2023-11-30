@@ -1,0 +1,82 @@
+<section id="hero" class="hero d-flex align-items-center">
+
+  <div class="container"><h1>Search all jobs</h1>
+    <form action="<%= jobs_find_path %>" method="get" class="form-search d-flex align-items-stretch mb-3">
+      <input type="text" class="form-control flex-grow-1" placeholder="ZIP, city or keywords" name="query" style="height: 60px;">
+      <!-- Filter by job type -->
+      <select name="job_type" class="form-select flex-grow-1" aria-label="Filter by job type">
+        <option value="">All job types</option>
+        <% @categories_list.each do |type| %>
+          <option value="<%= type %>"><%= type %></option>
+        <% end %>
+      </select>
+      <!-- Sort by -->
+      <select name="sort_by" class="form-select flex-grow-1" aria-label="Sort by">
+        <option value="">Sort by relevance</option>
+        <option value="salary_desc">Salary - High to Low</option>
+        <option value="salary_asc">Salary - Low to High</option>
+        <option value="date_desc">Date - Newest first</option>
+        <option value="date_asc">Date - Oldest first</option>
+      </select>
+      <button type="submit" class="btn btn-primary flex-grow-1">Search</button>
+    </form>
+  </div>
+</section>
+
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li>All available jobs</li>
+      </ol>
+    </div>
+  </nav>
+</div><!-- End Breadcrumbs -->
+
+<section class="py-5 bg-feed">
+  <div class="container px-3 px-lg-5">
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="container px-3 px-lg-5 .bg-dark.bg-gradient">
+        <div class="container px-3 bg-#1c1e21">
+          <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-center ">
+            <% unless @jobs.nil?
+                 @jobs.each do |job| %>
+                <% if job.public? %>
+                  <%= render "job_posting", job: job %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+          <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+              <% if @jobs.total_pages > 1 %>
+                <% if @jobs.current_page > 1 %>
+                  <li class="page-item">
+                    <%= link_to '«', find_jobs_path(page: @jobs.current_page - 1, q: params[:q]), class: 'page-link' %>
+                  </li>
+                <% end %>
+                <% @jobs.total_pages.times do |i| %>
+                  <% if @jobs.current_page == i + 1 %>
+                    <li class="page-item active"><%= link_to i + 1, '#', class: 'page-link' %></li>
+                  <% else %>
+                    <li class="page-item"><%= link_to i + 1, find_jobs_path(page: i + 1, q: params[:q]), class: 'page-link' %></li>
+                  <% end %>
+                <% end %>
+                <% if @jobs.current_page < @jobs.total_pages %>
+                  <li class="page-item">
+                    <%= link_to '»', find_jobs_path(page: @jobs.current_page + 1, q: params[:q]), class: 'page-link' %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="preloader"></div>

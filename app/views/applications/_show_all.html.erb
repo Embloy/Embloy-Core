@@ -1,0 +1,13 @@
+<h1>Applications for job #<%= @job.job_id %></h1>
+<h3>There are <%= @job.applications.count %> applications and counting!</h3>
+<section>
+  <ul>
+    <% unless @job.applications.nil?
+         @job.applications.each do |application|
+           @application = application %>
+        <%= render 'applications/show' %>
+      <% end %>
+    <% end %>
+  </ul>
+</section>
+

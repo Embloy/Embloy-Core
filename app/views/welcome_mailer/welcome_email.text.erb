@@ -1,0 +1,11 @@
+Hi <%= params[:user].first_name %>,
+
+You have successfully signed up to our prototype!
+Your user email is: <%= @user.email %>.
+
+Click on the link below to verify your account.
+<%= verify_account_url(token: @token) %>
+
+Best,
+
+The Embloy Team

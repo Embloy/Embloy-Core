@@ -1,0 +1,38 @@
+<section id="hero" class="hero d-flex align-items-center">
+
+  <div class="container">
+    <h2>Your Applications</h2>
+    <% if !@applications.nil? %>
+      <h3>You have applied for <%= @applications.count %> jobs! - <%= link_to "Find new jobs", find_jobs_path %></h3>
+    <% else %>
+      <h3>You have not applied for any jobs yet! - <%= link_to "Find new jobs here!", find_jobs_path %></h3>
+    <% end %>
+
+  </div>
+</section>
+
+<!-- Section-->
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li><a href="<%= profile_index_path %>">My Profile</a></li>
+        <li>My Applications</li>
+      </ol>
+    </div>
+  </nav>
+</div><!-- End Breadcrumbs -->
+
+
+<!-- Section-->
+<div class="container px-3 px-lg-5 mt-5 text-dark">
+  <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-center ">
+    <% @applications.each do |application| %>
+      <%= render "applications/own_application", application: application %>
+    <% end %>
+  </div>
+</div>
+
+<div id="preloader"></div>

@@ -1,0 +1,351 @@
+<section class="bg-dark" style="background: -webkit-linear-gradient(left, #3931af, #00c6ff);">
+  <section class="sample-page bg-image" style="background: -webkit-linear-gradient(left, #3931af, #00c6ff);">
+    <%= form_with url: { controller: :preferences, action: "update", method: :patch } do |form| %>
+      <div class="container register">
+        <div class="row">
+          <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+            <h3>Select Your Preferences</h3>
+            <p>You are 30 seconds away from earning your own money!</p>
+            <div class="pb-5">
+              <%= link_to "Find out more", "https://about.embloy.com" %><br>
+            </div>
+          </div>
+          <div class="col-md-9 register-right">
+            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Private</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Company</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <h3 class="register-heading">Insert your information</h3>
+                <div class="row register-form">
+                  <form>
+                    <div class="col-md-6">
+
+                      <div class="form-group">
+                        <label for="interests">Interests *</label>
+                        <input type="text" class="form-control" id="interests" value="<%= @preferences.interests %>" name="interests">
+                      </div>
+                      <div class="form-group">
+                        <label for="text2">Previous experience *</label>
+                        <input type="text" class="form-control" id="experience" value="<%= @preferences.experience %>" name="experience">
+                      </div>
+                      <div class="form-group">
+                        <label for="degree">Degree / Field of study *</label>
+                        <input type="text" class="form-control" id="degree" value="<%= @preferences.degree %>" name="degree">
+                      </div>
+                      <div class="form-group">
+                        <label for="num_jobs_done">Number of completed jobs *</label>
+                        <input type="number" class="form-control" id="num_jobs_done" value="<%= @preferences.num_jobs_done %>" name="num_jobs_done" min="0">
+                      </div>
+                      <div class="form-group">
+                        <label for="key_skills">Key Skills *</label>
+                        <input type="text" name="key_skills" id="key_skills" value="<%= @preferences.key_skills %>" class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <div class="maxl">
+                          <label class="radio inline">
+                            <input type="radio" <%= @preferences.gender == "male" ? "checked" : "unchecked" %> name="gender" value="male">
+                            <span> Male </span>
+                          </label>
+                          <label class="radio inline">
+                            <input type="radio" <%= @preferences.gender == "female" ? "checked" : "unchecked" %> name="gender" value="female">
+                            <span>Female </span>
+                          </label>
+                          <label class="radio inline">
+                            <input type="radio" <%= @preferences.gender == "other" ? "checked" : "unchecked" %> name="gender" value="other">
+                            <span> other </span>
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="spontaneity">Spontaneity</label>
+                        <input type="range" class="form-control-range" id="spontaneity" value="<%= @preferences.spontaneity %>" name="spontaneity" min="0" max="100">
+                      </div>
+                      <div class="form-group">
+                        <label for="dropdown1">What type of job are you looking for?</label>
+                        <select class="form-control">
+                          <option class="hidden" selected disabled>(single choice)</option>
+                          <option>Short-term, spontaneous</option>
+                          <option>Long-term, stable, fixed schedules</option>
+                          <option>High pay, very spontaneous</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="dropdown1">Favorite job types</label>
+                        <select class="form-control">
+                          <option class="hidden" selected disabled>(multiple choice)</option>
+                          <option>Events</option>
+                          <option>Education</option>
+                          <option>Retail</option>
+                        </select>
+                      </div>
+                      <div class="form-group row">
+                        <label for="salary_range_min">Salary Range (min-max)</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">€</span>
+                          </div>
+                          <input type="text" class="form-control" id="salary_range_min" name="salary_range_min" value="<%= @preferences.salary_range[0] %>" placeholder="Minimum">
+                          <div class="input-group-append">
+                            <span class="input-group-text">-</span>
+                          </div>
+                          <input type="text" class="form-control" id="salary_range_max" name="salary_range_max" value="<%= @preferences.salary_range[1] %>" placeholder="Maximum">
+                        </div>
+                      </div>
+                      <script>
+                          $(function () {
+                              var slider = $("#salary_range").slider({
+                                  tooltip: 'always'
+                              });
+                              slider.on("slide", function (slideEvt) {
+                                  var min = slideEvt.value[0];
+                                  var max = slideEvt.value[1];
+                                  var label = "$" + min.toLocaleString() + " - $" + max.toLocaleString();
+                                  $("#salary_range_label").val(label);
+                                  $("#salary_range_min").val(min);
+                                  $("#salary_range_max").val(max);
+                              });
+                              slider.trigger("slide");
+                          });
+                      </script>
+                      <div class="form-group">
+                        <label for="cvupload">Upload your CV *</label>
+                        <input type="file" class="form-control-file" id="cvupload" name="cvupload">
+                      </div>
+                      <!-- your input fields here -->
+                      <button type="button" class="btnRegister" data-bs-toggle="modal" data-bs-target="#finishPrivateModal">Finish</button>
+                      <div class="modal fade" id="finishPrivateModal" tabindex="-1" aria-labelledby="finishPrivateModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="finishPrivateModalLabel">Save preferences?</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              Your preferences will be saved, but you will be able to change them whenever you want.
+                              <p><cite>Note that all preferences marked with an asterisk (*) will be visible to the
+                                employers / owners of the jobs you apply to.</cite></p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary" id="savePreferencesBtn">Save changes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!--                    <input type="submit" class="btnRegister" value="Finish" data-bs-toggle="modal" data-bs-target="#finishPrivateModal">-->
+                      <!--                    <div class="modal fade" id="finishPrivateModal" tabindex="-1" aria-labelledby="finishPrivateModalLabel" aria-hidden="true">-->
+                      <!--                      <div class="modal-dialog">-->
+                      <!--                        <div class="modal-content">-->
+                      <!--                          <div class="modal-header">-->
+                      <!--                            <h5 class="modal-title" id="finishPrivateModalLabel">Save preferences?</h5>-->
+                      <!--                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="modal-body">-->
+                      <!--                            Your preferences will be saved, but you will be able to change them whenever you want.-->
+                      <!--                            <p><cite>Note that all preferences marked with an asterisk (*) will be visible to the-->
+                      <!--                              employers / owners of the jobs you apply to.-->
+                      <!--                            </cite></p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="modal-footer">-->
+                      <!--                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+                      <!--                            <button type="button" class="btn btn-primary">Save changes</button>-->
+                      <!--                          </div>-->
+                      <!--                        </div>-->
+                      <!--                      </div>-->
+                      <!--                    </div>-->
+                    </div>
+                  </form>
+
+                  <script>
+                      var form = document.querySelector('form');
+                      var finishBtn = document.querySelector('.btnRegister');
+                      var saveBtn = document.querySelector('#savePreferencesBtn');
+
+                      finishBtn.addEventListener('click', function (e) {
+                          e.preventDefault();
+                      });
+
+                      saveBtn.addEventListener('click', function (e) {
+                          // if (confirm('Are you sure you want to save your preferences?')) {
+                          form.submit();
+                          // }
+                      });
+                  </script>
+
+                </div>
+              </div>
+              <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <h3 class="register-heading">Continue as a company</h3>
+                <div class="row register-form">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="First Name *" value=""/>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Last Name *" value=""/>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" class="form-control" placeholder="Email *" value=""/>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone *" value=""/>
+                    </div>
+
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Password *" value=""/>
+                    </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control" placeholder="Confirm Password *" value=""/>
+                    </div>
+                    <div class="form-group">
+                      <select class="form-control">
+                        <option class="hidden" selected disabled>Please select your Sequrity Question</option>
+                        <option>What is your Birthdate?</option>
+                        <option>What is Your old Phone Number</option>
+                        <option>What is your Pet Name?</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control" placeholder="`Answer *" value=""/>
+                    </div>
+
+
+                    <input type="submit" class="btnRegister" value="Finish"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</section>
+<style>
+    .register-left {
+        text-align: center;
+        color: #fff;
+        margin-top: 4%;
+    }
+
+    .register-left a {
+        border: none;
+        border-radius: 1.5rem;
+        padding: 5%;
+        width: 60%;
+        background: #f8f9fa;
+        font-weight: bold;
+        color: #383d41;
+        margin-top: 30%;
+        margin-bottom: 3%;
+        cursor: pointer;
+    }
+
+    .register-right {
+        background: #f8f9fa;
+        border-top-left-radius: 10% 50%;
+        border-bottom-left-radius: 10% 50%;
+    }
+
+    .register-left img {
+        margin-top: 15%;
+        margin-bottom: 5%;
+        width: 25%;
+        -webkit-animation: mover 2s infinite alternate;
+        animation: mover 1s infinite alternate;
+    }
+
+    @-webkit-keyframes mover {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes mover {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .register-left p {
+        font-weight: lighter;
+        padding: 12%;
+        margin-top: -9%;
+    }
+
+    .register .register-form {
+        padding: 10%;
+        margin-top: 10%;
+    }
+
+    .btnRegister {
+        float: right;
+        margin-top: 10%;
+        border: none;
+        border-radius: 1.5rem;
+        padding: 2%;
+        background: #0062cc;
+        color: #fff;
+        font-weight: 600;
+        width: 50%;
+        cursor: pointer;
+    }
+
+    .register .nav-tabs {
+        margin-top: 3%;
+        border: none;
+        background: #0062cc;
+        border-radius: 1.5rem;
+        width: 28%;
+        float: right;
+    }
+
+    .register .nav-tabs .nav-link {
+        padding: 2%;
+        height: 34px;
+        font-weight: 600;
+        color: #fff;
+        border-top-right-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+    }
+
+    .register .nav-tabs .nav-link:hover {
+        border: none;
+    }
+
+    .register .nav-tabs .nav-link.active {
+        width: 100px;
+        color: #0062cc;
+        border: 2px solid #0062cc;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+    }
+
+    .register-heading {
+        text-align: center;
+        margin-top: 8%;
+        margin-bottom: -15%;
+        color: #495057;
+    }</style>
+
+<div id="preloader"></div>

@@ -1,0 +1,60 @@
+<!-- ======= Help Section ======= -->
+<section>
+  <div class="container ">
+    <div class="section-header">
+      <span>Help</span>
+      <h2>Help</h2>
+    </div>
+    <h2>Get Help</h2>
+    <p>Our support team is available 24/7 to help you with any questions or issues you may have. You can reach us
+      through any of the following channels:</p>
+    <ul>
+      <!--   <li>Live chat: Click the "Chat" button in the bottom right corner of your screen to chat with our support
+           representative Arnault in real time.
+         </li>-->
+      <li>Email: Send us an email at info@embloy.com and we'll get back to you within 24 hours.</li>
+    </ul>
+    <h3 id="common_issues">Common Issues</h3>
+    <p>Here are some common issues that users face and how to resolve them:</p>
+    <ul>
+      <li>
+        <!-- Button trigger modal -->
+        <%= form_with url: password_reset_path, class: "form-check d-flex align-items mb-3 bg-transparent", data_aos: "fade-up", data_aos_delay: "100" do |f| %>
+          <input type="submit" class="nav-link px-2" value="Forgot your password?" data-bs-toggle="modal" data-bs-target="#finishPrivateModal">
+          <div class="modal top fade" id="finishPrivateModal" tabindex="-1" aria-labelledby="finishPrivateModalLabel" aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+            <div class="modal-dialog" style="width: 300px;">
+              <div class="modal-content text-center">
+                <div class="modal-header h5 text-white bg-primary justify-content-center">
+                  Password Reset
+                </div>
+                <div class="modal-body px-5">
+                  <p class="py-2">
+                    Enter your email address and we'll send you an email with instructions to reset your password.
+                  </p>
+                  <div class="form-outline">
+                    <%= f.email_field :email, id: 'form1Example13', class: "form-control my-3", placeholder: "Email address", required: true %>
+                  </div>
+                  <%= f.submit 'Reset Password', class: "btn btn-primary w-100" %>
+                  <div class="d-flex justify-content-between mt-4">
+                    <a href="<%= sign_in_url %>">Login</a>
+                    <a href="<%= sign_up_url %>">Register</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </li>
+      <li><strong>I'm having trouble logging in.</strong> Make sure you're using the correct email address and password.
+        If you've forgotten your password, click the "Forgot Password" link on the login page to reset it.
+      </li>
+      <li><strong>I'm not receiving any job alerts.</strong> Check your email spam folder to make sure our alerts aren't
+        being filtered. Also, make sure your email address is entered correctly in your account settings.
+      </li>
+      <li><strong>I'm having trouble applying for jobs.</strong> Make sure you meet the qualifications for the job and
+        that your resume and cover letter are up to date. If you're still having issues, contact our support team for
+        assistance.
+      </li>
+    </ul>
+  </div>
+</section><!-- End Privacy Policy Section -->

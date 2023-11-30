@@ -1,0 +1,50 @@
+<section id="hero" class="hero d-flex align-items-center">
+
+  <div class="container"><h1>Whats next?</h1>
+    <!--    <form action="#" class="form-search d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">-->
+    <!--      <input type="text" class="form-control d-flex align-items-stretch" placeholder="ZIP, city or keywords">-->
+    <%#= text_field :search_input, type: "text", class: "form-search d-flex align-items-stretch mb-3", placeholder: "ZIP code or City" %>
+    <!--      <h3><%#= link_to "Search", jobs_find_path, class: 'btn btn-primary' %></h3>-->
+    <form action="<%= jobs_find_path %>" method="get" class="form-search d-flex align-items-stretch mb-3">
+      <input type="text" class="form-control" placeholder="ZIP, city or keywords" name="query" style="height: 60px">
+      <button type="submit" class="btn btn-primary">Search</button>
+      <!--      </form>-->
+
+    </form>
+  </div>
+</section>
+
+<!-- Section-->
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="<%= root_path %>">Home</a></li>
+        <li>Feed</li>
+      </ol>
+    </div>
+  </nav>
+</div><!-- End Breadcrumbs -->
+
+<section class="py-5 bg-feed">
+  <div class="container px-3 px-lg-5">
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+      <div class="container px-3 px-lg-5 .bg-dark.bg-gradient">
+        <div class="container px-3 bg-#1c1e21">
+          <div class="row gx-3 gx-lg-5 row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-center ">
+            <% unless @jobs.nil?
+                 @jobs.each do |job| %>
+                <% if job.public? %>
+                  <%= render "job_posting", job: job %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="preloader"></div>

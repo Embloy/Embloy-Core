@@ -1,0 +1,84 @@
+<%# if flash[:notice] %>
+<!--  <div class="alert alert-info alert-dismissible fade show" role="alert">-->
+<%#= flash[:notice] %>
+<!--    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </div>-->
+<%# end %>
+
+<%# if flash[:alert] %>
+<!--  <div class="alert alert-danger alert-dismissible fade show" role="alert">-->
+<!--    <button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+<!--      <span aria-hidden="true">&times;</span>-->
+<!--    </button>-->
+<!--  </div>-->
+<%# end %>
+
+<% if flash[:alert] %>
+  <!--  <div class="container p-5">-->
+  <div class="row no-gutters fixed-bottom  ml-3">
+    <div class="col-lg-5 col-md-12">
+      <div class="alert alert-danger fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        <h4 class="alert-danger"><%= flash[:alert] %></h4>
+        <!--          <p>This is an alert within a column. The column can be made any size at different viewpoints.</p>-->
+      </div>
+    </div>
+  </div>
+  <!--  </div>-->
+<% end %>
+
+<% if flash[:notice] %>
+  <!--  <div class="container p-5">-->
+  <div class="row no-gutters fixed-bottom  ml-3">
+    <div class="col-lg-5 col-md-12">
+      <div class="alert alert-primary fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        <h4 class="alert-primary"><%= flash[:notice] %></h4>
+        <!--          <p>This is an alert within a column. The column can be made any size at different viewpoints.</p>-->
+      </div>
+    </div>
+  </div>
+  <!--  </div>-->
+<% end %>
+
+<% if flash[:success] %>
+  <!--  <div class="container p-5">-->
+  <div class="row no-gutters fixed-bottom  ml-3">
+    <div class="col-lg-5 col-md-12">
+      <div class="alert alert-success fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="True">&times;</span>
+        </button>
+        <h4 class="alert-primary"><%= flash[:success] %></h4>
+        <!--          <p>This is an alert within a column. The column can be made any size at different viewpoints.</p>-->
+        <!--        </div>-->
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<style>
+    .alert-white {
+        background: #fff;
+    }
+
+    .alert-gradient {
+        background: linear-gradient(to top right, #e66465, #9198e5);
+        border-radius: 0px;
+        border: none;
+        color: #fff;
+    }
+
+    .alert-heading-gradient {
+        color: #fff;
+        font-weight: 900;
+    }
+
+</style>

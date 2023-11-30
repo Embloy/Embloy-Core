@@ -1,0 +1,115 @@
+<!-- Template Main CSS File -->
+<link href="../../../assets/applications_assets/css/style.css" rel="stylesheet">
+
+<!-- ======= Application Section ======= -->
+<section id="contact" class="contact">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Apply now as <%= @job.position %></h2>
+      <p>Unlock your full potential and take your career to the next level!
+      </p>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-5 d-flex align-items-stretch">
+        <div class="info">
+          <div class="address">
+            <i class="bi bi-geo-alt"></i>
+            <h4>Location:</h4>
+            <p><%= @job.format_address %></p>
+          </div>
+
+          <div class="email">
+            <i class="bi bi-envelope"></i>
+            <h4>Email:</h4>
+            <p><%= @job.user.email %></p>
+          </div>
+
+          <div class="phone">
+            <i class="bi bi-phone"></i>
+            <h4>Call:</h4>
+            <p><%= @job.user.phone.nil? ? "no phone number provided" : @job.user.phone %></p>
+          </div>
+
+          <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"/>
+          <style>
+              #mapid {
+                  border: 0;
+                  width: 100%;
+                  height: 290px;
+              }
+          </style>
+          <div id="mapid"></div>
+          <script>
+              var latitude = <%= @job.latitude.nil? ? 37.7749 : @job.latitude %>;
+              var longitude = <%= @job.longitude.nil? ? -122.4194 : @job.longitude %>;
+              var map = L.map('mapid', {maxBounds: L.latLngBounds([[latitude, longitude], [latitude, longitude]])}).setView([latitude, longitude], 13);
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                  attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+                  maxZoom: 18,
+                  tileSize: 512,
+                  zoomOffset: -1
+              }).addTo(map);
+              var marker = L.marker([latitude, longitude]).addTo(map);
+          </script>
+        </div>
+
+      </div>
+      <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+        <%= form_with model: [@job, @job.applications.build], class: "php-email-form" do |form| %>
+
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="name">Your Name</label>
+              <input type="text" class="form-control" placeholder="<%= Current.user.full_name %>" disabled>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="name">Your Email</label>
+              <input type="email" class="form-control" placeholder="<%= Current.user.email %>" disabled>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="name">Subject</label>
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Application for <%= @job.title %>" required>
+          </div>
+          <% if @job.cv_required && !ApplicationHelper.allowed_cv_formats_for_form(@job.allowed_cv_format).nil? %>
+            <div class="form-group">
+              <label for="name">CV
+                attachment (<%= @job.allowed_cv_format.join(',') %>)</label>
+              <p>
+                <%= form.fields_for :attachment_attributes do |attachment_fields| %>
+                  <%= attachment_fields.file_field :cv, placeholder: "Add your CV here.", required: @job.cv_required, accept: ApplicationHelper.allowed_cv_formats_for_form(@job.allowed_cv_format).join(','), class: 'form-control' %>
+                <% end %>
+              </p>
+            </div>
+          <% end %>
+          <div class=" form-group">
+            <label for="name">Message</label>
+            <%= form.text_area :application_text, rows: "10", minlength: 10, maxlength: 1000, class: "form-control", placeholder: "Now comes the difficult part ... you can use the following tips to improve your application:-->
+
+1. Tailor your application to the job: Ensure that your application is specific to the job you are applying for, and highlight how your skills and experience make you a strong candidate for the role.
+
+2. Use clear and concise language and avoid using overly technical or industry-specific terms that may be unclear to the reader.
+
+3. Proofread for errors: A well-written, error-free application can make a positive impression on the reader and increase your chances of being selected for an interview.
+
+", required: true %>
+          </div>
+          <div class="my-3">
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your message has been sent. Thank you!</div>
+          </div>
+          <div class="text-center">
+            <button type="submit">Send Application</button>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Application Section -->
